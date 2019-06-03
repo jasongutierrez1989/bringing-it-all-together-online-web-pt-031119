@@ -41,13 +41,13 @@ class Dog
 
     DB[:conn].execute(sql, self.name, self.album)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
-    @name = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][1]
-    @breed = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][2]
 
     dog = Dog.new
-    dog.id = @id
-    dog.name = @name
-    dog.breed = @breed
+
+    dog.id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    dog.name = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][1]
+    dog.breed = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][2]
+
     dog
   end
 
